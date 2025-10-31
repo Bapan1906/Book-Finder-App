@@ -34,66 +34,91 @@ const BookDetails = () => {
     : "No description available for this book.";
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <button
-        onClick={() => navigator(-1)}
-        className="mb-4 text-blue-600 hover:underline"
-      >
-        ← Back
-      </button>
-
-      <div className="flex flex-col md:flex-row gap-8 rounded-lg shadow-[0_0_8px_2px_#892DE1] p-6">
-        {/* Left Image */}
-        <div className="flex-shrink-0 w-full md:w-1/3 flex justify-center items-start">
-          <img
-            src={
-              info.imageLinks?.thumbnail ||
-              "https://via.placeholder.com/200x300?text=No+Image"
-            }
-            alt={info.title}
-            className="rounded-lg shadow-md w-60 h-auto"
-          />
+    <div>
+      {/* Navbar */}
+      <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
+        <div className="max-w-10xl mx-auto px-6 py-4 flex justify-between items-center">
+          {/* company name */}
+          <h3 className="text-2xl font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition">
+            BookFinder
+          </h3>
         </div>
+      </nav>
+      <div className="max-w-5xl mx-auto p-6 mt-25">
+        <div className="flex flex-col md:flex-row gap-8 rounded-lg shadow-[0_0_10px_1px_#202230] p-6">
+          {/* Left Image */}
+          <div className="flex-shrink-0 w-full md:w-1/3 flex justify-center items-start">
+            <img
+              src={
+                info.imageLinks?.thumbnail ||
+                "https://via.placeholder.com/200x300?text=No+Image"
+              }
+              alt={info.title}
+              className="rounded-lg shadow-md w-60 h-auto"
+            />
+          </div>
 
-        {/* Right Details */}
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-3">{info.title}</h1>
-          <p className="text-gray-600 mb-2">
-            <strong>Authors:</strong>{" "}
-            {info.authors ? info.authors.join(", ") : "Unknown Author"}
-          </p>
+          {/* Right Details */}
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold mb-4 text-gray-900">
+              {info.title}
+            </h1>
 
-          <p className="text-gray-600 mb-2">
-            <strong>Publisher:</strong> {info.publisher || "N/A"}
-          </p>
+            {/* Aligned Book Details */}
+            <div className="text-gray-700 mb-5 space-y-2">
+              <div className="flex">
+                <strong className="w-30">Authors:</strong>
+                <span>
+                  {info.authors ? info.authors.join(", ") : "Unknown Author"}
+                </span>
+              </div>
 
-          <p className="text-gray-600 mb-2">
-            <strong>Published Date:</strong> {info.publishedDate || "N/A"}
-          </p>
+              <div className="flex">
+                <strong className="w-33">Publisher:</strong>
+                <span>{info.publisher || "N/A"}</span>
+              </div>
 
-          <p className="text-gray-600 mb-2">
-            <strong>Page Count:</strong> {info.pageCount || "N/A"}
-          </p>
+              <div className="flex">
+                <strong className="w-44">Published Date:</strong>
+                <span>{info.publishedDate || "N/A"}</span>
+              </div>
 
-          {/* Description with "Read More" toggle */}
-          <p
-            className={`text-gray-800 leading-relaxed text-justify transition-all duration-300 ${
-              isExpanded ? "" : "line-clamp-3"
-            }`}
-          >
-            {description}
-          </p>
+              <div className="flex">
+                <strong className="w-37">Page Count:</strong>
+                <span>{info.pageCount || "N/A"}</span>
+              </div>
+            </div>
 
-          {description.length > 80 && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-blue-600 hover:underline mt-1"
+            {/* Description with "Read More" toggle */}
+            <p
+              className={`text-gray-800 leading-relaxed text-justify transition-all duration-300 ${
+                isExpanded ? "" : "line-clamp-3"
+              }`}
             >
-              {isExpanded ? "Show Less" : "Read More"}
-            </button>
-          )}
+              {description}
+            </p>
+
+            {description.length > 80 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-blue-600 hover:underline mt-2"
+              >
+                {isExpanded ? "Show Less" : "Read More"}
+              </button>
+            )}
+
+          </div>
         </div>
       </div>
+
+       {/* Back Button (bottom-right inside card) */}
+
+            <button
+              onClick={() => navigator(-1)}
+              className=" bottom-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
+            >
+              ← Back
+            </button>
     </div>
   );
 };
